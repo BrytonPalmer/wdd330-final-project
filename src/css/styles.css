@@ -1,0 +1,99 @@
+:root {
+    --dark-amethyst: #131036;     /* deep space background */
+    --amethyst-smoke: #9684AC;    /* soft purple accents */
+    --fresh-sky: #2DAAF7;         /* bright highlight blue */
+    --twilight-indigo: #37456D;   /* muted indigo for surfaces */
+    --baby-blue: #93C9E4;         /* soft secondary blue */
+
+    /* Optional: gradients */
+    --space-gradient: linear-gradient(135deg, #131036, #9684AC, #2DAAF7, #37456D, #93C9E4);
+}
+/* fonts for heading and body */
+.heading {
+    font-family: "Orbitron", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--baby-blue);
+}
+
+/* BODY — Roboto */
+.body-text {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    color: var(--twilight-indigo);
+}
+
+
+
+/* nav bar and header */
+.site-header {
+    background: var(--dark-amethyst);
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.site-title {
+    color: var(--amethyst-smoke);
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    color: var(--baby-blue);
+    text-decoration: none;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    padding-bottom: 3px;
+    transition: color 0.2s ease, border-bottom 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--fresh-sky);
+    border-bottom: 2px solid var(--fresh-sky);
+}
+
+
+/* hero section */
+.hero {
+    background: var(--space-gradient);
+    padding: 4rem 2rem;
+    color: white;
+    text-align: center;
+}
+
+
+/* buttons */
+.btn {
+    background: var(--fresh-sky);
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--baby-blue);
+}
+
+/* cards for apod, epic and favorite */
+.card {
+    background: var(--twilight-indigo);
+    border-radius: 10px;
+    padding: 1rem;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+}
