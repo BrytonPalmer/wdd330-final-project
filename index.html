@@ -9,27 +9,93 @@
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header class="site-header">
-      <nav class="navbar">
-          <a href="/index.html" class="nav-brand">
-              <img src="/src/assets/saturn-stars-logocut.png" alt="Saturn and Stars Logo" class="nav-logo">
-              <span class="site-title heading">Welcome to Saturn & Stars</span>
-          </a>
 
-          <ul class="nav-list">
-              <li><a href="/index.html" class="nav-link">HOME</a></li>
-              <li><a href="/apod.html" class="nav-link">APOD</a></li>
-              <li><a href="/epic.html" class="nav-link">EPIC</a></li>
-              <li><a href="/favorites.html" class="nav-link">FAVORITES</a></li>
-          </ul>
-      </nav>
-  </header>
+<header class="site-header">
+  <nav class="navbar">
+    <a href="/index.html" class="nav-brand">
+      <img src="/src/assets/saturn-stars-logocut.png" alt="Saturn and Stars Logo" class="nav-logo">
+      <span class="site-title heading">Welcome to Saturn & Stars</span>
+    </a>
 
+    <!-- Hamburger Button -->
+    <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <main>
-      <p class="body-text">Explore the universe one image at a time.</p>
+    <ul class="nav-list" id="nav-list">
+      <li><a href="/index.html" class="nav-link nav-btn">HOME</a></li>
+      <li><a href="/apod.html" class="nav-link nav-btn">APOD</a></li>
+      <li><a href="/epic.html" class="nav-link nav-btn">EPIC</a></li>
+      <li><a href="/favorites.html" class="nav-link nav-btn">FAVORITES</a></li>
+    </ul>
+  </nav>
+</header>
 
-    </main>
-    
+<main>
+
+  <!-- ================= HERO SECTION ================= -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2 class="hero-title">Explore the Universe</h2>
+      <p class="hero-subtitle">One Image at a Time</p>
+
+      <div class="hero-buttons">
+        <a href="/apod.html" class="btn primary">View APOD</a>
+        <a href="/epic.html" class="btn secondary">View EPIC</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FEATURE CARDS ================= -->
+  <section class="features">
+    <div class="feature-card">
+      <h3 class="feature-title">Astronomy Picture of the Day</h3>
+      <p class="feature-text">Discover NASA’s daily image with descriptions and date selection.</p>
+      <a href="/apod.html" class="btn small">Explore APOD</a>
+    </div>
+
+    <div class="feature-card">
+      <h3 class="feature-title">EPIC Earth Images</h3>
+      <p class="feature-text">View Earth from the DSCOVR satellite with time-based galleries.</p>
+      <a href="/epic.html" class="btn small">Explore EPIC</a>
+    </div>
+
+    <div class="feature-card">
+      <h3 class="feature-title">Your Favorites</h3>
+      <p class="feature-text">Save and revisit the images that inspire you the most.</p>
+      <a href="/favorites.html" class="btn small">View Favorites</a>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY PREVIEWS ================= -->
+  <section class="preview-section">
+    <h2 class="preview-heading">Latest APOD Images</h2>
+    <div class="preview-grid">
+      <div class="preview-thumb placeholder"></div>
+      <div class="preview-thumb placeholder"></div>
+      <div class="preview-thumb placeholder"></div>
+    </div>
+    <a href="/apod.html" class="btn small">See More</a>
+  </section>
+
+  <section class="preview-section">
+    <h2 class="preview-heading">Latest EPIC Images</h2>
+    <div class="preview-grid">
+      <div class="preview-thumb placeholder"></div>
+      <div class="preview-thumb placeholder"></div>
+      <div class="preview-thumb placeholder"></div>
+    </div>
+    <a href="/epic.html" class="btn small">See More</a>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>Saturn & Stars © 2026 — Powered by NASA APIs</p>
+</footer>
+
+<script src="/src/js/main.js"></script>
 </body>
 </html>

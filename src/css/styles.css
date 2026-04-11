@@ -97,3 +97,32 @@
 .card:hover {
     transform: translateY(-4px);
 }
+
+
+/* epic styling */
+.epic-card {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: var(--twilight-indigo);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.epic-image {
+    width: 100%;
+    border-radius: 10px;
+    margin: 1rem 0;
+}
+
+.epic-date {
+    color: var(--amethyst-smoke);
+    margin-bottom: 1rem;
+}
+
+/* apod styling */
+#apod-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+}
