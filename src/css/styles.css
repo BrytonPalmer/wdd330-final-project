@@ -1,44 +1,100 @@
 :root {
-    --dark-amethyst: #131036;     /* deep space background */
-    --amethyst-smoke: #9684AC;    /* soft purple accents */
-    --fresh-sky: #2DAAF7;         /* bright highlight blue */
-    --twilight-indigo: #37456D;   /* muted indigo for surfaces */
-    --baby-blue: #93C9E4;         /* soft secondary blue */
+    --dark-amethyst: #131036;
+    --amethyst-smoke: #9684AC;
+    --fresh-sky: #2DAAF7;
+    --twilight-indigo: #37456D;
+    --baby-blue: #93C9E4;
 
-    /* Optional: gradients */
-    --space-gradient: linear-gradient(135deg, #131036, #9684AC, #2DAAF7, #37456D, #93C9E4);
+    --white: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.35);
+
+    --space-gradient: linear-gradient(135deg, #131036, #2DAAF7 40%, #93C9E4);
 }
-/* fonts for heading and body */
-.heading {
+
+/* ------------------------------
+   GLOBAL RESET
+--------------------------------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--dark-amethyst);
+    font-family: "Roboto", sans-serif;
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ------------------------------
+   TYPOGRAPHY
+--------------------------------*/
+.heading,
+.site-title,
+.hero-title,
+.feature-title,
+.preview-heading {
     font-family: "Orbitron", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 700;
-    font-style: normal;
     letter-spacing: 1px;
     text-transform: uppercase;
     color: var(--baby-blue);
 }
 
-/* BODY — Roboto */
-.body-text {
-    font-family: "Roboto", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: normal;
-    color: var(--twilight-indigo);
+.hero-title {
+    font-size: 3rem;
+    font-weight: 800;
 }
 
-
-
-/* nav bar and header */
-.site-header {
-    background: var(--dark-amethyst);
-    padding: 0.5rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-.site-title {
+.hero-subtitle {
+    font-size: 1.3rem;
     color: var(--amethyst-smoke);
-    font-size: 1.5rem;
+    margin-top: 0.5rem;
+}
+
+/* ------------------------------
+   NAVIGATION BAR
+--------------------------------*/
+.site-header {
+    background: rgba(19, 16, 54, 0.55);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-decoration: none;
+}
+
+.nav-logo {
+    width: 48px;
+    height: auto;
+}
+
+.site-title {
+    font-size: 1.3rem;
+    color: var(--amethyst-smoke);
+}
+
+/* NAV LINKS */
+.nav-list {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
 }
 
 .nav-link {
@@ -56,73 +112,583 @@
     border-bottom: 2px solid var(--fresh-sky);
 }
 
+/* HAMBURGER MENU */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
 
-/* hero section */
+.hamburger span {
+    width: 26px;
+    height: 3px;
+    background: var(--baby-blue);
+    border-radius: 2px;
+}
+
+/* ------------------------------
+   HERO SECTION
+--------------------------------*/
 .hero {
     background: var(--space-gradient);
-    padding: 4rem 2rem;
-    color: white;
+    padding: 6rem 2rem;
     text-align: center;
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.4);
 }
 
+.hero-content {
+    max-width: 700px;
+    margin: auto;
+    animation: fadeIn 1.2s ease-out;
+}
 
-/* buttons */
+.hero-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* ------------------------------
+   BUTTON SYSTEM
+--------------------------------*/
 .btn {
-    background: var(--fresh-sky);
-    color: #fff;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    border: none;
+    display: inline-block;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
     font-weight: 600;
-    font-family: "Roboto", sans-serif;
     letter-spacing: 0.5px;
-    cursor: pointer;
-    transition: background 0.2s ease;
+    text-decoration: none;
+    transition: 0.25s ease;
+    box-shadow: 0 4px 12px var(--shadow);
 }
 
-.btn:hover {
+.btn.primary {
+    background: var(--fresh-sky);
+    color: var(--white);
+}
+
+.btn.primary:hover {
     background: var(--baby-blue);
 }
 
-/* cards for apod, epic and favorite */
-.card {
+.btn.secondary {
+    background: transparent;
+    border: 2px solid var(--baby-blue);
+    color: var(--baby-blue);
+}
+
+.btn.secondary:hover {
+    background: var(--baby-blue);
+    color: var(--dark-amethyst);
+}
+
+.btn.small {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+}
+
+/* ------------------------------
+   FEATURE CARDS
+--------------------------------*/
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    padding: 4rem 2rem;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.feature-card {
     background: var(--twilight-indigo);
-    border-radius: 10px;
-    padding: 1rem;
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    transition: transform 0.2s ease;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-}
-
-
-/* epic styling */
-.epic-card {
-    max-width: 800px;
-    margin: 2rem auto;
     padding: 1.5rem;
-    background: var(--twilight-indigo);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    box-shadow: 0 6px 18px var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.feature-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.feature-text {
+    color: var(--baby-blue);
+    margin-bottom: 1rem;
+}
+
+/* ------------------------------
+   PREVIEW SECTIONS
+--------------------------------*/
+.preview-section {
+    padding: 3rem 2rem;
+    text-align: center;
+}
+
+.preview-heading {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.2rem;
+    max-width: 900px;
+    margin: auto;
+}
+
+.preview-thumb {
+    background: var(--twilight-indigo);
+    height: 140px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.25s ease;
+}
+
+.preview-thumb:hover {
+    transform: scale(1.05);
+}
+
+/* Placeholder shimmer */
+.placeholder {
+    background: linear-gradient(90deg, #2a2a4a 0%, #3a3a5a 50%, #2a2a4a 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite;
+}
+
+/* ------------------------------
+   FOOTER
+--------------------------------*/
+.site-footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--amethyst-smoke);
+    font-size: 0.9rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ------------------------------
+   ANIMATIONS
+--------------------------------*/
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* ------------------------------
+   RESPONSIVE NAVIGATION
+--------------------------------*/
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .nav-list {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: rgba(19, 16, 54, 0.95);
+        flex-direction: column;
+        width: 200px;
+        padding: 1rem;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .nav-list.open {
+        transform: translateX(0);
+    }
+}
+
+/* ------------------------------
+   CONTROL PANEL (NASA Instrument Panel)
+--------------------------------*/
+.apod-control-panel {
+    background: var(--twilight-indigo);
+    padding: 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+.page-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--baby-blue);
+}
+
+.control-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-label {
+    font-family: "Orbitron", sans-serif;
+    color: var(--amethyst-smoke);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.control-input {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--baby-blue);
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+}
+
+.control-input:focus {
+    outline: none;
+    border-color: var(--fresh-sky);
+    box-shadow: 0 0 8px rgba(45, 170, 247, 0.4);
+}
+
+/* ------------------------------
+   APOD LAYOUT (Two-Column NASA Layout)
+--------------------------------*/
+.apod-layout {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+}
+
+.apod-media {
+    background: var(--twilight-indigo);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.apod-media img,
+.apod-media iframe {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* ------------------------------
+   APOD INFO PANEL
+--------------------------------*/
+.apod-info {
+    background: var(--twilight-indigo);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.apod-title {
+    font-family: "Orbitron", sans-serif;
+    font-size: 1.6rem;
+    color: var(--baby-blue);
+    margin-bottom: 1rem;
+}
+
+.apod-date {
+    color: var(--amethyst-smoke);
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.apod-description {
+    color: var(--baby-blue);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.apod-meta {
+    font-size: 0.85rem;
+    color: var(--amethyst-smoke);
+    margin-bottom: 1.5rem;
+}
+
+/* Save to Favorites Button */
+.apod-save-btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background: var(--fresh-sky);
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.apod-save-btn:hover {
+    background: var(--baby-blue);
+}
+
+/* ------------------------------
+   LOADING SHIMMER
+--------------------------------*/
+.apod-loading {
+    height: 300px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #2a2a4a 0%, #3a3a5a 50%, #2a2a4a 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite;
+}
+
+/* ------------------------------
+   RESPONSIVE
+--------------------------------*/
+@media (max-width: 900px) {
+    .apod-layout {
+        grid-template-columns: 1fr;
+    }
+}
+/*
+  CONTROL PANEL
+--------------------------------*/
+.epic-control-panel {
+    background: var(--twilight-indigo);
+    padding: 2rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    text-align: center;
+}
+
+.epic-control-panel .page-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--baby-blue);
+}
+
+/* ------------------------------
+   GALLERY GRID
+--------------------------------*/
+.epic-gallery {
+    max-width: 1300px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+/* ------------------------------
+   EPIC CARD
+--------------------------------*/
+.epic-card {
+    background: var(--twilight-indigo);
+    padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.epic-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
 }
 
 .epic-image {
     width: 100%;
     border-radius: 10px;
-    margin: 1rem 0;
-}
-
-.epic-date {
-    color: var(--amethyst-smoke);
     margin-bottom: 1rem;
 }
 
-/* apod styling */
-#apod-container {
-    max-width: 900px;
-    margin: 2rem auto;
+.epic-timestamp {
+    color: var(--amethyst-smoke);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Save to Favorites Button */
+.epic-save-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--fresh-sky);
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.epic-save-btn:hover {
+    background: var(--baby-blue);
+}
+
+/* ------------------------------
+   LOADING SHIMMER
+--------------------------------*/
+.epic-loading {
+    height: 240px;
+    border-radius: 12px;
+    background: linear-gradient(90deg, #2a2a4a 0%, #3a3a5a 50%, #2a2a4a 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite;
+}
+/*
+ CONTROL PANEL
+--------------------------------*/
+.favorites-control-panel {
+    background: var(--twilight-indigo);
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.favorites-subtitle {
+    color: var(--amethyst-smoke);
+    margin-bottom: 1.5rem;
+}
+
+/* ------------------------------
+   GALLERY GRID
+--------------------------------*/
+.favorites-gallery {
+    max-width: 1300px;
+    margin: 3rem auto;
+    padding: 0 2rem;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+}
+
+/* ------------------------------
+   FAVORITE CARD
+--------------------------------*/
+.favorite-card {
+    background: var(--twilight-indigo);
     padding: 1rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.favorite-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.45);
+}
+
+.favorite-thumb {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.favorite-title {
+    font-family: "Orbitron", sans-serif;
+    color: var(--baby-blue);
+    margin-bottom: 0.5rem;
+}
+
+.favorite-date,
+.favorite-type {
+    color: var(--amethyst-smoke);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Remove Button */
+.favorite-remove-btn {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    background: #d9534f;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.25s ease;
+}
+
+.favorite-remove-btn:hover {
+    background: #c9302c;
+}
+
+/* ------------------------------
+   EMPTY STATE
+--------------------------------*/
+.favorites-empty {
+    text-align: center;
+    margin: 4rem auto;
+}
+
+.favorites-empty.hidden {
+    display: none;
+}
+
+/* =========================================================
+   MODAL VIEWER — CINEMATIC NASA LIGHTBOX
+   ========================================================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+}
+
+.modal-img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+.modal-caption {
+    margin-top: 1rem;
+    color: var(--baby-blue);
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+}
+
+.modal-close {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 2.5rem;
+    color: var(--fresh-sky);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+    color: var(--baby-blue);
 }

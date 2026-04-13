@@ -1,45 +1,180 @@
 const API_KEY = "7uLHHdvit0KavMYJnXO4jPcKbpIRCpoB5xX52H9O";
 
-async function getEPIC() {
-    try {
-        const response = await fetch(
-            `https://api.nasa.gov/EPIC/api/natural?api_key=${API_KEY}`
-        );
+const epicContainer = document.getElementById("epic-container");
+const dateInput = document.getElementById("epic-date");
+const loadBtn = document.getElementById("epic-load-btn");
 
-        if (!response.ok) {
-            throw new Error("Failed to fetch EPIC data");
+// -------------------------------
+// INITIAL LOAD — MOST RECENT EPIC DAY
+// -------------------------------
+document.addEventListener("DOMContentLoaded", async () => {
+    showLoadingGrid();
+
+    try {
+        const res = await fetch(`https://api.nasa.gov/EPIC/api/natural?api_key=${API_KEY}`);
+        const data = await res.json();
+
+        if (!data.length) {
+            showError("No EPIC images available.");
+            return;
         }
 
-        const data = await response.json();
+        // Most recent date in the dataset
+        const latestDate = data[0].date.split(" ")[0];
+        dateInput.value = latestDate;
 
-        // Use the most recent image
-        const latest = data[0];
-        displayEPIC(latest);
+        fetchEPICByDate(latestDate);
 
-    } catch (error) {
-        console.error(error);
-        document.querySelector("#epic-container").innerHTML =
-            `<p class="error">Unable to load EPIC image right now.</p>`;
+    } catch (err) {
+        console.error(err);
+        showError("Unable to load EPIC images.");
+    }
+});
+
+// -------------------------------
+// LOAD BUTTON HANDLER
+// -------------------------------
+if (loadBtn) {
+    loadBtn.addEventListener("click", () => {
+        if (!dateInput.value) return;
+        fetchEPICByDate(dateInput.value);
+    });
+}
+
+// -------------------------------
+// FETCH EPIC IMAGES FOR A DATE
+// -------------------------------
+async function fetchEPICByDate(date) {
+    showLoadingGrid();
+
+    try {
+        const res = await fetch(
+            `https://api.nasa.gov/EPIC/api/natural/date/${date}?api_key=${API_KEY}`
+        );
+
+        if (!res.ok) throw new Error("Failed to fetch EPIC data");
+
+        const data = await res.json();
+
+        if (!data.length) {
+            showError("No EPIC images for this date.");
+            return;
+        }
+
+        renderEPICGallery(data);
+
+    } catch (err) {
+        console.error(err);
+        showError("Unable to load EPIC images for this date.");
     }
 }
 
-function displayEPIC(item) {
-    const container = document.querySelector("#epic-container");
+// -------------------------------
+// RENDER EPIC GALLERY GRID
+// -------------------------------
+function renderEPICGallery(items) {
+    epicContainer.innerHTML = "";
 
-    // Extract date parts
-    const [year, month, day] = item.date.split(" ")[0].split("-");
+    items.forEach(item => {
+        const [year, month, day] = item.date.split(" ")[0].split("-");
 
-    // Build the image URL
-    const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${day}/png/${item.image}.png`;
+        const imageUrl = `https://epic.gsfc.nasa.gov/archive/natural/${year}/${month}/${day}/png/${item.image}.png`;
 
-    container.innerHTML = `
-        <div class="epic-card">
-            <h2 class="heading">EPIC: Earth Polychromatic Imaging Camera</h2>
-            <p class="epic-date">${item.date}</p>
+        const card = document.createElement("div");
+        card.classList.add("epic-card");
+
+        card.innerHTML = `
             <img src="${imageUrl}" alt="EPIC Earth Image" class="epic-image">
-            <p class="body-text epic-caption">${item.caption}</p>
-        </div>
+
+            <p class="epic-timestamp">${item.date}</p>
+
+            <button class="epic-save-btn"
+                data-url="${imageUrl}"
+                data-title="EPIC Earth Image"
+                data-date="${item.date}">
+                Save to Favorites
+            </button>
+
+            <button class="btn secondary epic-download-btn"
+                data-url="${imageUrl}"
+                data-title="${item.image}">
+                Download
+            </button>
+        `;
+
+        epicContainer.appendChild(card);
+
+        card.querySelector(".epic-image").addEventListener("click", () => {
+            openModal(imageUrl, item.caption);
+        });
+    });
+
+    // Attach listeners
+    document.querySelectorAll(".epic-save-btn").forEach(btn => {
+        btn.addEventListener("click", saveFavorite);
+    });
+
+    document.querySelectorAll(".epic-download-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            downloadImage(btn.dataset.url, btn.dataset.title);
+        });
+    });
+}
+
+// -------------------------------
+// SAVE TO FAVORITES
+// -------------------------------
+function saveFavorite(e) {
+    const btn = e.target;
+
+    const favorite = {
+        url: btn.dataset.url,
+        title: btn.dataset.title,
+        date: btn.dataset.date,
+        type: "EPIC"
+    };
+
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    // Avoid duplicates
+    if (!favorites.some(f => f.url === favorite.url)) {
+        favorites.push(favorite);
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+    }
+
+    btn.textContent = "Saved!";
+    btn.style.background = "var(--baby-blue)";
+}
+
+// -------------------------------
+// DOWNLOAD IMAGE
+// -------------------------------
+function downloadImage(url, title) {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${title}.png`;
+    link.click();
+}
+
+// -------------------------------
+// LOADING SHIMMER GRID
+// -------------------------------
+function showLoadingGrid() {
+    epicContainer.innerHTML = `
+        <div class="epic-loading"></div>
+        <div class="epic-loading"></div>
+        <div class="epic-loading"></div>
+        <div class="epic-loading"></div>
     `;
 }
 
-getEPIC();
+// -------------------------------
+// ERROR STATE
+// -------------------------------
+function showError(message) {
+    epicContainer.innerHTML = `
+        <div class="epic-card">
+            <p class="body-text">${message}</p>
+        </div>
+    `;
+}

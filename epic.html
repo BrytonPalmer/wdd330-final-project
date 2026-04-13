@@ -1,36 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>NASA'S EPIC</title>
+    <title>NASA EPIC | Saturn & Stars</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/css/styles.css">
 
+    <link rel="stylesheet" href="/src/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <header class="site-header">
-      <nav class="navbar">
-          <a href="/index.html" class="nav-brand">
-              <img src="/src/assets/saturn-stars-logocut.png" alt="Saturn and Stars Logo" class="nav-logo">
-              <span class="site-title heading">Saturn & Stars</span>
-          </a>
 
-          <ul class="nav-list">
-              <li><a href="/index.html" class="nav-link">HOME</a></li>
-              <li><a href="/apod.html" class="nav-link">APOD</a></li>
-              <li><a href="/epic.html" class="nav-link">EPIC</a></li>
-              <li><a href="/favorites.html" class="nav-link">FAVORITES</a></li>
-          </ul>
-      </nav>
-  </header>
+<header class="site-header">
+    <nav class="navbar">
+        <a href="/index.html" class="nav-brand">
+            <img src="/src/assets/saturn-stars-logocut.png" alt="Saturn and Stars Logo" class="nav-logo">
+            <span class="site-title heading">Saturn & Stars</span>
+        </a>
 
-    <main>
-        <section id="epic-container"></section>
+        <ul class="nav-list">
+            <li><a href="/index.html" class="nav-link">HOME</a></li>
+            <li><a href="/apod.html" class="nav-link">APOD</a></li>
+            <li><a href="/epic.html" class="nav-link active">EPIC</a></li>
+            <li><a href="/favorites.html" class="nav-link">FAVORITES</a></li>
+        </ul>
+    </nav>
+</header>
 
-    </main>
-    
-    <script type="module" src="/src/js/epic.js"></script>
+<main>
 
+    <!-- ================= CONTROL PANEL ================= -->
+    <section class="epic-control-panel">
+        <h1 class="page-title heading">EPIC Earth Images</h1>
+
+        <div class="control-row">
+            <label for="epic-date" class="control-label">Select Date</label>
+            <input type="date" id="epic-date" class="control-input">
+            <button id="epic-load-btn" class="btn primary">Load Images</button>
+        </div>
+    </section>
+
+    <!-- ================= EPIC GALLERY ================= -->
+    <section id="epic-container" class="epic-gallery">
+        <!-- JS will inject:
+            - .epic-card
+            - .epic-image
+            - .epic-timestamp
+            - .epic-save-btn
+        -->
+    </section>
+
+</main>
+<div id="image-modal" class="modal hidden">
+    <div class="modal-content">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <img id="modal-image" src="" alt="Full View" class="modal-img">
+        <p id="modal-caption" class="modal-caption"></p>
+    </div>
+</div>
+
+<script type="module" src="/src/js/epic.js"></script>
 </body>
 </html>

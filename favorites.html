@@ -1,33 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Favorite pictures</title>
+    <title>Favorites | Saturn & Stars</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/css/styles.css">
 
+    <link rel="stylesheet" href="/src/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 </head>
+
 <body>
-  <header class="site-header">
-      <nav class="navbar">
-          <a href="/index.html" class="nav-brand">
-              <img src="/src/assets/saturn-stars-logocut.png" alt="Saturn and Stars Logo" class="nav-logo">
-              <span class="site-title heading">Saturn & Stars</span>
-          </a>
 
-          <ul class="nav-list">
-              <li><a href="/index.html" class="nav-link">HOME</a></li>
-              <li><a href="/apod.html" class="nav-link">APOD</a></li>
-              <li><a href="/epic.html" class="nav-link">EPIC</a></li>
-              <li><a href="/favorites.html" class="nav-link">FAVORITES</a></li>
-          </ul>
-      </nav>
-  </header>
+<header class="site-header">
+    <nav class="navbar">
+        <a href="/index.html" class="nav-brand">
+            <img src="/src/assets/saturn-stars-logocut.png" alt="Saturn and Stars Logo" class="nav-logo">
+            <span class="site-title heading">Saturn & Stars</span>
+        </a>
 
-    <main>
+        <ul class="nav-list">
+            <li><a href="/index.html" class="nav-link">HOME</a></li>
+            <li><a href="/apod.html" class="nav-link">APOD</a></li>
+            <li><a href="/epic.html" class="nav-link">EPIC</a></li>
+            <li><a href="/favorites.html" class="nav-link active">FAVORITES</a></li>
+        </ul>
+    </nav>
+</header>
 
-    </main>
-    
+<main>
+
+    <!-- ================= CONTROL PANEL ================= -->
+    <section class="favorites-control-panel">
+        <h1 class="page-title heading">Your Favorite Images</h1>
+        <p class="favorites-subtitle">Saved from APOD and EPIC</p>
+
+        <button id="clear-favorites-btn" class="btn secondary">Clear All Favorites</button>
+    </section>
+
+    <!-- ================= FAVORITES GALLERY ================= -->
+    <section id="favorites-container" class="favorites-gallery">
+        <!-- JS will inject:
+            - .favorite-card
+            - .favorite-thumb
+            - .favorite-title
+            - .favorite-date
+            - .favorite-type
+            - .favorite-remove-btn
+        -->
+    </section>
+
+    <!-- ================= EMPTY STATE ================= -->
+    <section id="favorites-empty" class="favorites-empty hidden">
+        <h2 class="heading">No Favorites Yet</h2>
+        <p class="body-text">Explore APOD or EPIC and save the images that inspire you.</p>
+        <a href="/apod.html" class="btn primary">Explore APOD</a>
+    </section>
+
+</main>
+<div id="image-modal" class="modal hidden">
+    <div class="modal-content">
+        <span id="modal-close" class="modal-close">&times;</span>
+        <img id="modal-image" src="" alt="Full View" class="modal-img">
+        <p id="modal-caption" class="modal-caption"></p>
+    </div>
+</div>
+
+<script type="module" src="/src/js/favorites.js"></script>
 </body>
 </html>
