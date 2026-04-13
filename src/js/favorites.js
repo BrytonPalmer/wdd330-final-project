@@ -1,3 +1,6 @@
+import { downloadImage } from "./utils.js";
+import { openModal } from "./modal.js";
+
 const favoritesContainer = document.getElementById("favorites-container");
 const emptyState = document.getElementById("favorites-empty");
 const clearBtn = document.getElementById("clear-favorites-btn");
@@ -15,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 function loadFavorites() {
     const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
 
-    // Handle empty state
     if (favorites.length === 0) {
         favoritesContainer.innerHTML = "";
         emptyState.classList.remove("hidden");
@@ -36,17 +38,33 @@ function loadFavorites() {
             <p class="favorite-date">${item.date}</p>
             <p class="favorite-type">${item.type}</p>
 
+            <button class="favorite-view-btn">View Details</button>
+
+            <button class="favorite-download-btn"
+                data-url="${item.url}"
+                data-title="${item.title}">
+                Download
+            </button>
+
             <button class="favorite-remove-btn" data-index="${index}">
                 Remove
             </button>
         `;
 
         favoritesContainer.appendChild(card);
-    });
 
-    // Attach remove listeners
-    document.querySelectorAll(".favorite-remove-btn").forEach(btn => {
-        btn.addEventListener("click", removeFavorite);
+        //  VIEW DETAILS (MODAL)
+        card.querySelector(".favorite-view-btn").addEventListener("click", () => {
+            openModal(item.url, item.title);
+        });
+
+        //  DOWNLOAD BUTTON
+        card.querySelector(".favorite-download-btn").addEventListener("click", () => {
+            downloadImage(item.url, item.title);
+        });
+
+        //  REMOVE BUTTON 
+        card.querySelector(".favorite-remove-btn").addEventListener("click", removeFavorite);
     });
 }
 

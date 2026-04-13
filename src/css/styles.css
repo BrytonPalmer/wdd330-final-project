@@ -692,3 +692,139 @@ body {
 .modal-close:hover {
     color: var(--baby-blue);
 }
+
+/* desktop layout enhancements */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+@media (min-width: 1200px) {
+    .apod-container,
+    .epic-grid,
+    .favorites-grid {
+        gap: 2.5rem;
+    }
+}
+body {
+    opacity: 0;
+    animation: fadeIn .6s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+/* responsive grid enhancements */
+.epic-image,
+.favorite-thumb {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+@media (min-width: 900px) {
+    .epic-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1400px) {
+    .epic-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* transitions and animations */
+.epic-card,
+.favorite-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.epic-card:hover,
+.favorite-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+.epic-card,
+.favorite-card {
+    opacity: 0;
+    animation: fadeUp .6s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* responsive image scaling */
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* buttons for favorites cards */
+.favorite-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.favorite-view-btn,
+.favorite-download-btn,
+.favorite-remove-btn {
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+/* View Details */
+.favorite-view-btn {
+    background: var(--fresh-sky);
+    color: #000;
+}
+.favorite-view-btn:hover {
+    background: var(--baby-blue);
+    transform: translateY(-2px);
+}
+
+/* Download */
+.favorite-download-btn {
+    background: var(--deep-space);
+    color: var(--fresh-sky);
+}
+.favorite-download-btn:hover {
+    background: var(--fresh-sky);
+    color: #000;
+    transform: translateY(-2px);
+}
+
+/* Remove */
+.favorite-remove-btn {
+    background: #b30000;
+    color: white;
+}
+.favorite-remove-btn:hover {
+    background: #ff4d4d;
+    transform: translateY(-2px);
+}
+
+.favorite-card {
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.favorite-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+.favorite-card {
+    opacity: 0;
+    animation: fadeUp .6s ease forwards;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

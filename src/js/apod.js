@@ -1,3 +1,5 @@
+import { downloadImage } from "./utils.js";
+
 const API_KEY = "7uLHHdvit0KavMYJnXO4jPcKbpIRCpoB5xX52H9O";
 
 const apodContainer = document.getElementById("apod-container");
@@ -129,15 +131,6 @@ function saveFavorite(e) {
     btn.style.background = "var(--baby-blue)";
 }
 
-// -------------------------------
-// DOWNLOAD IMAGE
-// -------------------------------
-function downloadImage(url, title) {
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${title}.jpg`;
-    link.click();
-}
 
 // -------------------------------
 // LOADING SHIMMER
