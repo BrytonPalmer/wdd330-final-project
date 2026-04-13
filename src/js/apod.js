@@ -45,7 +45,10 @@ async function fetchAPOD(date) {
 
     } catch (error) {
         console.error(error);
-        showError("Unable to load APOD right now. Try another date.");
+        showError(`
+            <strong>Unable to load APOD.</strong><br>
+            Please check your date or try again later.
+        `);
     }
 }
 

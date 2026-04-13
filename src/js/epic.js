@@ -65,7 +65,10 @@ async function fetchEPICByDate(date) {
 
     } catch (err) {
         console.error(err);
-        showError("Unable to load EPIC images for this date.");
+        showError(`
+            <strong>No EPIC images found.</strong><br>
+            Try selecting a different date.
+        `);
     }
 }
 
