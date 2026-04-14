@@ -253,6 +253,19 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 12px var(--shadow);
     transition: transform 0.25s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.preview-unavailable {
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  color: #ccc;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 }
 
 .preview-thumb:hover {

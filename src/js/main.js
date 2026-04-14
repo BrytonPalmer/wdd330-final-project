@@ -1,3 +1,11 @@
+
+import { initNav } from "./nav.js";
+
+document.addEventListener("DOMContentLoaded", () => {
+  initNav();
+});
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const toggle = document.getElementById("theme-toggle");
     if (!toggle) return;
@@ -6,3 +14,5 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.toggle("dark-mode");
     });
 });
+
+

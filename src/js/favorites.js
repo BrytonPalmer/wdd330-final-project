@@ -1,6 +1,7 @@
 import { downloadImage } from "./utils.js";
 import { openModal } from "./modal.js";
 
+
 const favoritesContainer = document.getElementById("favorites-container");
 const emptyState = document.getElementById("favorites-empty");
 const clearBtn = document.getElementById("clear-favorites-btn");

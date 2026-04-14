@@ -1,5 +1,6 @@
 import { downloadImage } from "./utils.js";
 
+
 const API_KEY = "7uLHHdvit0KavMYJnXO4jPcKbpIRCpoB5xX52H9O";
 
 const apodContainer = document.getElementById("apod-container");
