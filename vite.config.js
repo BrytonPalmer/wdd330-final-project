@@ -5,9 +5,10 @@ export default defineConfig({
     build: {
         rollupOptions: {
             input: {
-                main: "index.html",
-                apod: "apod.html",
-                epic: "epic.html",
+                main: "public/index.html",
+                apod: "public/apod.html",
+                epic: "public/epic.html",
+                favorites: "public/favorites.html",
             }
         }
     }
